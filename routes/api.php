@@ -24,4 +24,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('me', [AuthController::class, "me"]);
 
     Route::post('create', [EmployeeController::class, "create"]);
+    Route::post('delete_employee', [EmployeeController::class, "delete_employee"]);
+    Route::post('tokenEmployee', [EmployeeController::class, "tokenEmployee"]);
 });
