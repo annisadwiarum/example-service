@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -67,6 +67,18 @@ class EmployeeController extends Controller
 
         $employee->delete();
         return response()->json(['message' => 'Data karyawan berhasil dihapus']);
+    }
+
+    public function edit_employee($id)
+    {
+        $employee = Employee::findOrFail($id);
+
+        if (!$employee) {
+            return response()->json(['message' => 'Data karyawan tidak ditemukan']);
+        }
+        dd('test edit sedang berlangsung');
+
+        return response()->json(['data' => $employee]);
     }
 
     /**

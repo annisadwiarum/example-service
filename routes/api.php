@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EmployeeController;
+use App\Models\Precense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
     Route::post('create', [EmployeeController::class, "create"]);
     Route::post('delete_employee', [EmployeeController::class, "delete_employee"]);
+    Route::get('edit_employee', [EmployeeController::class, "edit_employee"]);
     Route::post('tokenEmployee', [EmployeeController::class, "tokenEmployee"]);
 });
