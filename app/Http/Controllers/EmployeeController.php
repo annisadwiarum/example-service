@@ -69,47 +69,39 @@ class EmployeeController extends Controller
         return response()->json(['message' => 'Data karyawan berhasil dihapus']);
     }
 
-    public function edit_employee($id)
+    public function edit_employee(Request $request, $id)
     {
         $employee = Employee::findOrFail($id);
 
-        if (!$employee) {
-            return response()->json(['message' => 'Data karyawan tidak ditemukan']);
-        }
-        dd('test edit sedang berlangsung');
+        // if (!$employee) {
+        //     return response()->json(['message' => 'Data karyawan tidak ditemukan']);
+        // }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'place_of_birth' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'gender' => 'required|string|max:255',
+            'address' => 'required|string',
+            'division' => 'required|string',
+        ]);
 
-        return response()->json(['data' => $employee]);
+        // Update the employee data
+        $employee->title = $request->input('title');
+        $employee->first_name = $request->input('first_name');
+        $employee->last_name = $request->input('last_name');
+        $employee->email = $request->input('email');
+        $employee->phone_number = $request->input('phone_number');
+        $employee->place_of_birth = $request->input('place_of_birth');
+        $employee->date_of_birth = $request->input('date_of_birth');
+        $employee->gender = $request->input('gender');
+        $employee->address = $request->input('address');
+        $employee->division = $request->input('division');
+        $employee->save();
+
+        return response()->json(['message' => 'Employee data updated successfully']);
     }
-
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    // public function tokenEmployee()
-    // {
-    //     $credentials = request(['first_name', 'last_name', 'email']);
-
-    //     if (!$token = auth()->attempt($credentials)) {
-    //         return response()->json(['error' => 'Unauthorized'], 401);
-    //     }
-
-    //     return $this->respondWithToken($token);
-    // }
-
-    // public function check_token()
-    // {
-    //     return response()->json(auth()->employee());
-    // }
-
-    // protected function respondWithToken($token)
-    // {
-    //     return response()->json([
-    //         'access_token' => $token,
-    //         'token_type' => 'bearer',
-    //         'expires_in' => auth()->factory()->getTTL() * 60
-    //     ]);
-    // }
-
-
 }
