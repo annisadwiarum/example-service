@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Carbon\Carbon;
 // use App\Models\Holiday;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Attendance extends Model
+
+class Attendance extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
 
     protected $fillable = [
         'title',
@@ -62,5 +68,15 @@ class Attendance extends Model
     public function positions()
     {
         return $this->belongsToMany(Position::class);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\EmployeedController;
+use App\Http\Controllers\AttendanceController;
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('register', [AuthController::class, "register"]);
@@ -21,4 +23,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('create_position', [PositionController::class, 'create_position']);
 
     Route::post('create_holiday', [HolidayController::class, 'create_holiday']);
+
+    Route::post('create_attendance', [AttendanceController::class, 'create_attendance']);
+
+    Route::post('add_employeed', [EmployeedController::class, 'add_employeed']);
+    Route::post('delete_employeed', [EmployeedController::class, "delete_employeed"]);
+    Route::put('edit_employeed/{id}', [EmployeedController::class, 'edit_employeed']);
 });

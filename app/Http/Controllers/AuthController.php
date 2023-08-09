@@ -20,7 +20,10 @@ class AuthController extends Controller
         $validator = Validator::make(request()->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'phone' => 'required',
+            'position_id' => 'required',
+            'role_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -31,6 +34,9 @@ class AuthController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
+            'phone' => request('phone'),
+            'position_id' => request('position_id'),
+            'role_id' => request('role_id'),
         ]);
 
         if ($user) {
