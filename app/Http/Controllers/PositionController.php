@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PositionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['create_position']]);
-    }
 
     public function create_position()
     {
@@ -33,5 +29,12 @@ class PositionController extends Controller
         } else {
             return response()->json(['message' => 'Position of Employee is failed added']);
         }
+    }
+
+    public function get_positions()
+    {
+        $position = Position::all();
+
+        return response()->json($position);
     }
 }
