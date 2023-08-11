@@ -85,4 +85,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function position()
+    {
+        return $this->hasOne(Position::class, 'id', 'position_id');
+    }
 }

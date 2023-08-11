@@ -65,9 +65,9 @@ class Attendance extends Authenticatable implements JWTSubject
         });
     }
 
-    public function positions()
+    public function position()
     {
-        return $this->belongsToMany(Position::class);
+        return $this->belongsTo(Position::class);
     }
 
     public function getJWTIdentifier()

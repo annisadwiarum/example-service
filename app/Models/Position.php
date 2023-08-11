@@ -24,4 +24,9 @@ class Position extends Model
     {
         return [];
     }
+
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class, 'id', 'attendance_id');
+    }
 }
